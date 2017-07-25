@@ -1,8 +1,8 @@
 defmodule BabysitterTest do
   use ExUnit.Case
-  doctest Babysitter
+  import Babysitter
 
-  test "the truth" do
-    assert 1 + 1 == 2
+  test "single hour" do
+    assert 12 == tally_earnings()
   end
 end

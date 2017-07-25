@@ -10,7 +10,7 @@ defmodule BabysitterTest do
     assert 24 == tally_earnings(6, 2)
   end
 
-  test "" do
-
+  test "past midnight" do
+    assert 92 == tally_earnings(7,7)
   end
 end

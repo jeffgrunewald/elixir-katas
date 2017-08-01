@@ -1,17 +1,8 @@
 defmodule Babysitter do
 
-  def tally_earnings(start_time, end_time) do
-      calc_time_diff(start_time, end_time) |> mult_rate()
-  end
+  def tally_earnings(start_time, end_time, bed_time), do: (end_time - start_time) * calc_rate(start_time, end_time, bed_time)
 
-  defp calc_time_diff(start_time, end_time) do
-      if end_time < start_time do
-          ((12 - start_time) + end_time)
-      else
-          (end_time - start_time)
-      end
-  end
-
-  defp mult_rate(hours), do: hours * 12
-
+  defp calc_rate(start_time, end_time, bed_time) when end_time <= bed_time and end_time > 5, do: 12
+  defp calc_rate(start_time, end_time, bed_time) when end_time > bed_time, do: 8
+  defp calc_rate(start_time, end_time, bed_time) when end_time < 5, do: 16
 end

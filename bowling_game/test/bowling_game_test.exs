@@ -3,6 +3,6 @@ defmodule BowlingGameTest do
   import BowlingGame
 
   test "returns the value of a single roll" do
-      assert 4 == get_score "4"
+      assert 4 == get_score("4")
   end
 end

@@ -1,6 +1,9 @@
 defmodule HelloExunit.PMap do
+  require Logger
+
   def pmap(collection, function) do
     caller = self
+    Logger.debug("pmap started with input: #{inspect(collection)}")
     collection
     |> Enum.map(fn x -> spawn_link(fn ->
                   send caller, { self, function.(x) }

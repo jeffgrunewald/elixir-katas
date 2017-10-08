@@ -1,6 +1,7 @@
 defmodule HelloExunitTest do
-  use ExUnit.Case
+  use ExUnit.Case, async: false
   import HelloExunit.PMap
+  import ExUnit.CaptureLog
 
   setup _context do
     {:ok, [in_list: [1,2,3],
@@ -20,5 +21,11 @@ defmodule HelloExunitTest do
     refute pid1 == pid2
     refute pid1 == pid3
     refute pid2 == pid3
+  end
+
+  test "pmap logs a completion debug log message", context do
+    assert capture_log(fn ->
+        pmap(context[:in_list], fn x -> x * 2 end)
+      end) =~ "[debug] pmap started with input: " <> inspect(context[:in_list])
   end
 end

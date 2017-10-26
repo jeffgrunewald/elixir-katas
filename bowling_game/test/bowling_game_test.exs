@@ -16,7 +16,15 @@ defmodule BowlingGameTest do
       assert 0 == get_score("-")
   end
 
+  test("return 10 when a 'X' is supplied") do
+      assert 10 == get_score("X")
+  end
+
   test("returns sum of two when two rolls are passed") do
       assert 9 == get_score("45")
+  end
+
+  test "returns only one number when a bunch of gutters are thrown" do
+      assert 2 == get_score("-2-")
   end
 end

@@ -7,6 +7,7 @@ defmodule BowlingGame do
   end
 
   defp single_roll("-"), do: 0
+  defp single_roll("X"), do: 10
   defp single_roll(string) do
       String.to_integer(string)
   end

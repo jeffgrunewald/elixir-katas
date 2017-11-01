@@ -27,4 +27,8 @@ defmodule BowlingGameTest do
   test "returns only one number when a bunch of gutters are thrown" do
       assert 2 == get_score("-2-")
   end
+
+  test "returns sum of 18 when a strike and a 4 are rolled" do
+      assert 18 == get_score("X4")
+  end
 end

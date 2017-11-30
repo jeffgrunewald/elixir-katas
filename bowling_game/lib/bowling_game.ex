@@ -1,8 +1,8 @@
 defmodule BowlingGame do
 
   def get_score(string) do
-      String.codepoints(string)
-      |> Enum.find_index(equal_to("X"))
+      scores_list = String.codepoints(string)
+      compound_special_rolls([], scores_list, &bonus_rolls/3)
       |> Stream.map(&single_roll/1)
       |> Enum.sum
   end
@@ -13,8 +13,27 @@ defmodule BowlingGame do
       String.to_integer(string)
   end
 
-  defp equal_to(elem) do
-      fn(x) -> x == elem end
+  defp compound_special_rolls(accum, [], _), do: accum
+  defp compound_special_rolls(accum, [ head | tail ], func) do
+      func.(accum, head, tail)
+      |> compound_special_rolls(tail, func)
+  end
+
+  defp bonus_rolls(accum, head, []), do: accum ++ [head]
+  defp bonus_rolls(accum, head, [foo]) do
+      case head do
+          "X" ->
+            accum ++ [head] ++ [foo]
+          _ ->
+            accum ++ [head]
+      end
+  end
+  defp bonus_rolls(accum, head, [foo, bar|_]) do
+      case head do
+          "X" ->
+            accum ++ [head] ++ [foo, bar]
+          _ -> accum ++ [head]
+      end
   end
 
 end

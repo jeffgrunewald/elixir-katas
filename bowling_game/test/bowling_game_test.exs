@@ -31,4 +31,8 @@ defmodule BowlingGameTest do
   test "returns sum of 18 when a strike and a 4 are rolled" do
       assert 18 == get_score("X4")
   end
+
+  test "returns sum of 22 when a strike is followed by a 4 and a 2" do
+      assert 22 == get_score("X42")
+  end
 end
